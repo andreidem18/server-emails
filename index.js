@@ -5,11 +5,19 @@ const {enviarCorreo} = require("./nodemailer");
 
 app.use(express.json());
 
-app.post("/enviar-correo", (req, res) => {
+app.get("/", (req, res) => {
+    res.send("Home rute");
+})
+
+app.get("/send-email", (req, res) => {
+    res.send("Emails route");
+})
+
+app.post("/send-email", (req, res) => {
     const {name, email, phone, message} = req.body;
     enviarCorreo(name, email, phone, message);
     res.json({
-        message: "Se ha enviado el correo electronico"
+        message: "the email was sent"
     });
 });
 
