@@ -3,6 +3,8 @@ const app = express();
 
 const {enviarCorreo} = require("./nodemailer");
 
+const PORT = process.env.PORT || 8000;
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -21,6 +23,6 @@ app.get("/send-email", (req, res) => {
 //     });
 // });
 
-app.listen(8000, () => {
-    console.log("Servidor iniciado en el puerto 8000");
+app.listen(PORT, () => {
+    console.log("Server listening on", PORT);
 });
