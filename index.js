@@ -1,24 +1,13 @@
 const express = require("express");
-const fs = require("fs"); //filesystem
 const app = express();
 
 const {enviarCorreo} = require("./nodemailer");
 
-//req => request (peticion)
-//res => response (respuesta)
-app.get("/users", (req, res) => {
-    fs.readFile('db.json', (error, data) => {
-        if(error){
-            return res.json({
-                message: "No puede ser procesada la respuesta"
-            });
-        }
-        return res.send(data.toString())
-    })
-});
+app.use(express.json());
 
 app.post("/enviar-correo", (req, res) => {
-    enviarCorreo();
+    const {name, email, phone, message} = req.body;
+    enviarCorreo(name, email, phone, message);
     res.json({
         message: "Se ha enviado el correo electronico"
     });
