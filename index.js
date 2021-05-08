@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 const {enviarCorreo} = require("./nodemailer");
@@ -6,6 +7,8 @@ const {enviarCorreo} = require("./nodemailer");
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
+
+app.use(cors({origin: 'https://andresmendoza.netlify.app/'}));
 
 app.get("/", (req, res) => {
     res.send("Home rute");
